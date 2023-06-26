@@ -22,7 +22,7 @@ FUNCTION_NAME=$(aws cloudformation describe-stacks \
 
 aws lambda invoke \
   --function-name $FUNCTION_NAME \
-  outfile.txt
+  $(tty) >/dev/null
 ```
 
 # Update CloudFormation Stack with Lambda
