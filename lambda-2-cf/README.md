@@ -5,6 +5,7 @@ aws cloudformation create-stack \
     --capabilities CAPABILITY_IAM \
     --template-body file://$(pwd)/lambda.yaml \
     --no-cli-pager
+    
 aws cloudformation wait \
     stack-create-complete \
     --stack-name 'test-lambda-stack' \
@@ -18,6 +19,7 @@ FUNCTION_NAME=$(aws cloudformation describe-stacks \
   --stack-name 'test-lambda-stack' \
   --query "Stacks[0].Outputs[?OutputKey=='LambdaFunctionName'].OutputValue" \
   --output text)
+
 aws lambda invoke \
   --function-name $FUNCTION_NAME \
   outfile.txt
